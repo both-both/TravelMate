@@ -1,5 +1,9 @@
-import { NavStyled } from "../Nav/Nav.styled";
+import { Nav } from "../Nav/Nav";
 
 export const Header = () => {
-  return <NavStyled />;
+  return (
+    <header>
+      <Nav />
+    </header>
+  );
 };

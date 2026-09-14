@@ -1,6 +1,10 @@
-// Endpoints.tsx
-const BASE_URL = "";
+const BASE_URL = "http://localhost:4000/api/";
 
 export const endpoints = {
-  return (null)
+  countries: `${BASE_URL}countries`,
+  country: (id: string) => `${BASE_URL}countries/${id}`,
+  cities: `${BASE_URL}cities`,
+  city: (id: string) => `${BASE_URL}cities/${id}`,
+  attractions: `${BASE_URL}attractions`,
+  attraction: (id: string) => `${BASE_URL}attractions/${id}`,
 };
