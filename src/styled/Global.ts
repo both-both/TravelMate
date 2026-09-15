@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import { theme } from "./Theme";
+import { resetLink } from "./mixins";
 export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0px;
@@ -87,6 +88,7 @@ export const GlobalStyle = createGlobalStyle`
 
   a {
     color: inherit;
+    ${resetLink}
   }
 
   :focus-visible {

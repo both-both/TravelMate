@@ -1,14 +1,13 @@
-import { Footer } from "./layout/Footer/Footer";
-import { Header } from "./layout/Header/Header";
+import { Footer } from "./components/layout/Footer/Footer";
+import { Header } from "./components/layout/Header/Header";
 import { AppRouter } from "./router/AppRouter";
-import { Main } from "./layout/Main/Main";
+import { Main } from "./components/layout/Main/Main";
 
 function App() {
   return (
     <>
       <Header />
       <Main>
-        HALLO
         <AppRouter />
       </Main>
       <Footer />

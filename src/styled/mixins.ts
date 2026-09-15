@@ -10,6 +10,10 @@ ${reset}
 list-style-type: none;
 `;
 
+export const resetLink = `
+${reset}
+text-decoration: none`;
+
 export const resetButton = `
 ${reset} 
 background-color: transparent;

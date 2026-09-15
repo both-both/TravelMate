@@ -1,16 +1,28 @@
-export type Info = {
-  id: number;
-  languageId: number;
-  name: string;
-  description: string;
-  language: { code: string; name: string };
-};
+export interface ApiListResponse<T> {
+  data: T[];
+}
 
-export type Country = {
+export interface Language {
   id: number;
   code: string;
+  name: string;
+}
+export interface TravelItem {
+  id: string | number;
   image: string;
   infos: Info[];
+}
+
+export interface Country extends TravelItem {
+  code: string;
+}
+
+export type Info = {
+  name: string;
+  id: number;
+  languageId: number;
+  description: string;
+  language: { code: string; name: string };
 };
 
 export type City = {
