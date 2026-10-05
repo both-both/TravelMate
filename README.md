@@ -1,78 +1,53 @@
-# React + TypeScript + Vite
+# TravelMate – Fra CMS til React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TravelMate viser lande, byer og seværdigheder. Alt indhold hentes fra Sanity CMS (projekt `hk5md3yk`, dataset `production`).
 
-Currently, two official plugins are available:
+## Kom i gang
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+`.env` skal indeholde:
 
 ```
+VITE_SANITY_PROJECT_ID=hk5md3yk
+VITE_SANITY_DATASET=production
+```
+
+## GROQ eller GraphQL
+
+Jeg har valgt GROQ.
+
+1. Sprog vælges i forespørgslen. Teksterne ligger i Sanity som `{ da, en, es }`. Med `name[$lang]` returnerer GROQ kun det valgte sprog, så komponenterne får en almindelig tekst.
+2. Relationer i ét kald. `country->` henter byens land, og `*[_type == "attraction" && references(^._id)]` henter byens seværdigheder i samme forespørgsel.
+3. Har valgt GROQ da der er ingen ekstra deploy. GROQ virker direkte på datasettet.
+4. Kan testes i Postman og Vision med samme forespørgsel, som frontenden bruger.
+
+## Organisering af API-kald
+
+```
+Sanity → GROQ (queries.ts) → useSanityQuery → useCountries / useCities / useAttractions → page → module → bruger
+```
+
+| Fil                               | Ansvar                                                                                                             |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| `src/data/queries.ts`             | Alle GROQ-forespørgsler. Felterne for hver type er defineret én gang og genbruges                                  |
+| `src/hooks/useSanityQuery.ts`     | Generelt hook. Bygger URL'en med `encodeURIComponent`, kalder `fetch` og håndterer loading, fejl og forældede svar |
+| `src/hooks/useCountries.ts` m.fl. | Specifikke hooks. Henter sproget fra `LanguageContext` og sender det med som `$lang`                               |
+| `src/types/sanity.types.ts`       | Typer, der svarer til det, forespørgslerne returnerer                                                              |
+| `src/pages/`                      | Læser `slug` fra URL'en, kalder hooket og viser loading og fejl                                                    |
+| `src/components/modules/`         | Viser data. Lister henter selv via hooks, detaljemoduler får data som props                                        |
+
+Pages og komponenter kalder aldrig `fetch` direkte.
+
+## Relationer (bonus)
+
+- **By** viser sit land (link) og sine seværdigheder.
+- **Land** viser sine byer.
+- **Seværdighed** viser sin by (link) og et kort ud fra koordinaterne.
+
+## Data
+
+Indholdet er flyttet fra mit tidligere Express/SQLite-API til Sanity med et eksportscript (Prisma → NDJSON) og `sanity dataset import`. Ændres en tekst i Sanity Studio, vises ændringen i TravelMate, når siden genindlæses.
