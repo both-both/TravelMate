@@ -1,48 +1,58 @@
-import { useParams } from "react-router-dom";
-import { useCountry } from "../../../hooks/useCountries";
-import { useLanguage } from "../../../context/LanguageContext/LanguageContext";
+import { Link } from "react-router-dom";
+import { LuArrowLeft } from "react-icons/lu";
+import type { CountryDetail } from "../../../types/sanity.types";
 import {
+  BackLink,
   DetailImage,
   DetailsGrid,
-  DetailsStyled,
+  DetailTitle,
   InfoBox,
+  ListStyled,
 } from "../../../styled/Elements";
-import { SERVER_URL } from "../../../data/Endpoints";
-import { CardIcon } from "../../elements/Card/Card.styled";
+import { Section } from "../../layout/Section/Section";
+import { Card } from "../../elements/Card/Card";
 
-export const CountryDetails = () => {
-  const { id } = useParams();
-  const { country, error } = useCountry(id!);
-  const { language } = useLanguage();
-
-  // Håndtere fejl og venter på data
-  if (error) return <p role="alert">{error}</p>;
-  if (!country) return <p>Henter land...</p>;
-
-  // Finder den danske beskrivelse
-  const info = country.infos.find((info) => info.language.code === language);
-
-  if (!info) return <p>Ingen dansk beskrivelse fundet.</p>;
-
+export const CountryDetails = ({ country }: { country: CountryDetail }) => {
   return (
-    <DetailsStyled>
-      <h1>{info.name}</h1>
+    <>
+      <BackLink to="/countries">
+        <LuArrowLeft aria-hidden="true" /> Back to countries
+      </BackLink>
+
+      <DetailTitle>
+        <img
+          src={`https://flagcdn.com/${country.code.toLowerCase()}.svg`}
+          alt=""
+          width="56"
+          height="40"
+        />
+        <h1>{country.name}</h1>
+      </DetailTitle>
 
       <DetailsGrid>
         <DetailImage
-          src={new URL(country.image, SERVER_URL).href}
-          alt={info.name}
+          src={`${country.image}?w=1200&auto=format`}
+          alt={country.name}
         />
+
         <InfoBox>
-          <p>{info.description}</p>
-          <CardIcon
-            src={`https://flagcdn.com/${country.code.toLowerCase()}.svg`}
-            alt={`Flag for ${country.code}`}
-            width="80"
-            height="50"
-          />
+          <p>{country.description}</p>
         </InfoBox>
       </DetailsGrid>
-    </DetailsStyled>
+
+      <Section title={`Cities in ${country.name}`}>
+        <ListStyled>
+          {country.cities.map((city) => (
+            <Link key={city._id} to={`/cities/${city.slug}`}>
+              <Card
+                image={`${city.image}?w=500&auto=format`}
+                title={city.name}
+                subtitle={city.description}
+              />
+            </Link>
+          ))}
+        </ListStyled>
+      </Section>
+    </>
   );
 };

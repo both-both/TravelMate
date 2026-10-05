@@ -1,43 +1,74 @@
-import { useParams } from "react-router-dom";
-import { SERVER_URL } from "../../../data/Endpoints";
-import { useAttraction } from "../../../hooks/useAttractions";
+import { Link } from "react-router-dom";
+import { LuArrowLeft, LuExternalLink } from "react-icons/lu";
+import type { Attraction } from "../../../types/sanity.types";
 import {
+  BackLink,
   DetailImage,
   DetailsGrid,
-  DetailsStyled,
+  DetailTitle,
   InfoBox,
+  InfoList,
 } from "../../../styled/Elements";
-import { useLanguage } from "../../../context/LanguageContext/LanguageContext";
+import { Section } from "../../layout/Section/Section";
+import { Map } from "../../elements/Map/Map";
 
-export const AttrationDetails = () => {
-  const { id } = useParams();
-  const { attraction, error } = useAttraction(id!);
-  const { language } = useLanguage();
-
-  // Håndter fejl og vent på data.
-  if (error) return <p role="alert">{error}</p>;
-  if (!attraction) return <p>Henter seværdighed...</p>;
-
-  // Find den danske beskrivelse.
-  const info = attraction.infos.find((info) => info.language.code === language);
-
-  if (!info) return <p>Ingen dansk beskrivelse fundet.</p>;
-
+export const AttractionDetails = ({
+  attraction,
+}: {
+  attraction: Attraction;
+}) => {
   return (
-    <DetailsStyled>
-      <h1>{info.name}</h1>
+    <>
+      <BackLink to="/attractions">
+        <LuArrowLeft aria-hidden="true" /> Back to places
+      </BackLink>
+
+      <DetailTitle>
+        <h1>{attraction.name}</h1>
+      </DetailTitle>
 
       <DetailsGrid>
         <DetailImage
-          src={new URL(attraction.image, SERVER_URL).href}
-          alt={info.name}
-          style={{ width: "100%", maxWidth: 600, borderRadius: 12 }}
+          src={`${attraction.image}?w=1200&auto=format`}
+          alt={attraction.name}
         />
 
         <InfoBox>
-          <p>{info.description}</p>
+          <p>{attraction.description}</p>
+
+          <InfoList>
+            <dt>By</dt>
+            <dd>
+              <Link to={`/cities/${attraction.city.slug}`}>
+                {attraction.city.name}
+              </Link>
+            </dd>
+
+            <dt>Adresse</dt>
+            <dd>{attraction.address}</dd>
+
+            <dt>Koordinater</dt>
+            <dd>
+              {attraction.location.lat}, {attraction.location.lng}
+            </dd>
+
+            <dt>Hjemmeside</dt>
+            <dd>
+              <a href={attraction.website} target="_blank" rel="noreferrer">
+                {attraction.website} <LuExternalLink aria-hidden="true" />
+              </a>
+            </dd>
+          </InfoList>
         </InfoBox>
       </DetailsGrid>
-    </DetailsStyled>
+
+      <Section title="Find på kortet">
+        <Map
+          lat={attraction.location.lat}
+          lng={attraction.location.lng}
+          title={attraction.name}
+        />
+      </Section>
+    </>
   );
 };

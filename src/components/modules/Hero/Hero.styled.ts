@@ -1,11 +1,6 @@
 import styled from "styled-components";
 import { theme } from "../../../styled/Theme";
-import { SERVER_URL } from "../../../data/Endpoints";
-
-const heroImage = new URL(
-  "assets/hero-frontend/travelmate-hero.png",
-  SERVER_URL,
-).href;
+import heroImage from "../../../assets/images/travelmate-hero.png";
 
 export const HeroStyled = styled.section`
   padding: 48px 32px 40px;

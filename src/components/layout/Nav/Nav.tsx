@@ -5,10 +5,10 @@ export const Nav = () => {
   return (
     <NavStyled>
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/">Countries</NavLink>
-      <NavLink to="/">Cities</NavLink>
-      <NavLink to="/">Attractions</NavLink>
-      <NavLink to="/">About</NavLink>
+      <NavLink to="/countries">Countries</NavLink>
+      <NavLink to="/cities">Cities</NavLink>
+      <NavLink to="/attractions">Places</NavLink>
+      <NavLink to="/about">About</NavLink>
     </NavStyled>
   );
 };

@@ -1,4 +1,3 @@
-import { Container } from "../../elements/Container/Container";
 import { ContentWrapperStyled } from "./ContentWrapper.styled";
 import type { ContentWrapperProps } from "./ContentWrapper.type";
 

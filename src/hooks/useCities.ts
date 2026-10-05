@@ -1,23 +1,23 @@
-import type { City } from "../types/api.types";
-import { endpoints } from "../data/Endpoints";
-import { useFetch } from "./useFetch";
+import { useLanguage } from "../context/LanguageContext/LanguageContext";
+import { citiesQuery, cityQuery } from "../data/queries";
+import type { City, CityDetail } from "../types/sanity.types";
+import { useSanityQuery } from "./useSanityQuery";
 
 export const useCities = () => {
-  const { data, isLoading, error } = useFetch<City[]>(endpoints.cities);
+  const { language } = useLanguage();
+  const { data, isLoading, error } = useSanityQuery<City[]>(citiesQuery, {
+    lang: language,
+  });
 
-  return {
-    cities: data ?? [],
-    isLoading,
-    error,
-  };
+  return { cities: data ?? [], isLoading, error };
 };
 
-export const useCity = (id: string) => {
-  const { data, isLoading, error } = useFetch<City>(endpoints.city(id));
+export const useCity = (slug: string) => {
+  const { language } = useLanguage();
+  const { data, isLoading, error } = useSanityQuery<CityDetail>(cityQuery, {
+    slug,
+    lang: language,
+  });
 
-  return {
-    city: data,
-    isLoading,
-    error,
-  };
+  return { city: data, isLoading, error };
 };
