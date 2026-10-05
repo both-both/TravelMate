@@ -59,5 +59,5 @@ export const LoaderMessage = styled.p`
   margin-top: 0.75rem;
   font-family: ${theme.font.body};
   font-size: ${theme.fontsize.body};
-  color: ${theme.color.light.text};
+  color: ${theme.color.text};
 `;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import type { ContainerStyleProps } from "./Container.types";
+import { theme } from "../../../styled/Theme";
 
-export const ContainerStyled = styled.div<ContainerStyleProps>`
-  background-color: ${({ $color }) => $color ?? "transparent"};
+export const ContainerStyled = styled.div`
+  width: min(90%, ${theme.layout.contentWidth});
+  margin-inline: auto;
 `;

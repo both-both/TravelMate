@@ -14,7 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: ${theme.font.body};
     font-size: ${theme.fontsize.body};
     line-height: ${theme.lineHeight.body};
-    background: ${theme.color.light.background};
+    background: ${theme.color.background};
     color: ${theme.color.black};
   }
 

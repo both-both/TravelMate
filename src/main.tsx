@@ -5,14 +5,20 @@ import { ThemeProvider } from "styled-components";
 import { BrowserRouter } from "react-router-dom";
 import { theme } from "./styled/Theme.ts";
 import { GlobalStyle } from "./styled/Global.ts";
+import { LanguageProvider } from "./context/LanguageContext/LanguageProvider.tsx";
+import { DarkModeProvider } from "./context/DarkModeContext/DarkModeProvider.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
+      <LanguageProvider>
+        <DarkModeProvider>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <App />
+          </ThemeProvider>
+        </DarkModeProvider>
+      </LanguageProvider>
     </BrowserRouter>
   </StrictMode>,
 );

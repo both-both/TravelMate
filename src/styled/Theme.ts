@@ -1,24 +1,20 @@
 export const theme = {
   color: {
-    primary: "#1a56db",
+    primary: "#0867e8",
     secondary: "#f0f4ff",
-    tertiary: "#03689C",
-    grey: "#efefef",
-    goalsBackground: "#eee",
+    tertiary: "#0f2d4f",
     white: "#fff",
     black: "#000",
-    border: "#ccc",
-    buttonBackground: "#f7ebec",
-    light: {
-      background: "#fff",
-      text: "#222",
-    },
+    border: "#edf1f5",
+    background: "#fff",
+    text: "#222",
+    mutedText: "#64748b",
     dark: {
       background: "#1e1e1e",
       text: "#ffffff",
-      surface: "#172638",
       mutedText: "#b8c8d9",
       border: "#34475c",
+      surface: "#172638",
       control: "#243b53",
       accent: "#8dc4ff",
     },
@@ -28,13 +24,13 @@ export const theme = {
     body: "Open Sans, Arial, sans-serif",
   },
   fontsize: {
-    body: "14px",
-    medium: "16px",
-    navigation: "18px",
-    h3: "20px",
-    h2: "24px",
-    mobileHeading: "25px",
-    h1: "30px",
+    body: "0.875rem", //14px
+    medium: "1rem", //16px
+    navigation: "1.125rem", //18px
+    h3: "1.25rem", //20px
+    h2: "1.5rem", //24px
+    mobileHeading: "1.5rem", //24px
+    h1: "1.875rem", //30px
   },
   fontWeight: {
     light: 300,

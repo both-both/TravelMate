@@ -1,12 +1,13 @@
-import { endpoints } from "../data/Endpopints";
-import type { Country } from "../data/Api.types";
+import { endpoints } from "../data/Endpoints";
+import type { Country } from "../types/api.types";
 import { useFetch } from "./useFetch";
 
 export const useCountries = () => {
-  const { data, error } = useFetch<Country[]>(endpoints.countries);
+  const { data, isLoading, error } = useFetch<Country[]>(endpoints.countries);
 
   return {
     countries: data ?? [],
+    isLoading,
     error,
   };
 };

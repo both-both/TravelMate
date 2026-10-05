@@ -7,11 +7,12 @@ export type ContainerTag =
   | "article";
 
 export type ContainerProps = {
-  children?: React.ReactNode;
+  innerHTML?: React.ElementType;
   className?: string;
-  innerHTML?: ContainerTag;
+  children?: React.ReactNode;
   title?: string;
 };
+
 export type ContainerStyleProps = {
   $color?: string;
 };

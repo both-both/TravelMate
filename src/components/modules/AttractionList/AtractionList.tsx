@@ -1,39 +1,32 @@
 import { Link } from "react-router-dom";
 import { SERVER_URL } from "../../../data/Endpoints";
-import { useCountries } from "../../../hooks/useCountries";
 import { useLanguage } from "../../../context/LanguageContext/LanguageContext";
-import { Card } from "../../elements/Card/Card";
+import { useAttractions } from "../../../hooks/useAttractions";
 import { ListStyled } from "../../../styled/Elements";
+import { Card } from "../../elements/Card/Card";
 
-export const CountryList = ({ mode = "all" }: { mode?: "all" | "popular" }) => {
-  const { countries, isLoading, error } = useCountries();
+export const AttractionList = () => {
+  const { attractions, isLoading, error } = useAttractions();
   const { language } = useLanguage();
 
   if (error) return <p role="alert">{error}</p>;
 
   if (isLoading) return <p>Loading...</p>;
 
-  let finalList = countries;
-
-  if (mode === "popular") {
-    finalList = countries.slice(0, 5);
-  }
-
   return (
     <ListStyled>
-      {finalList.map((country) => {
-        const info = country.infos.find(
+      {attractions.map((attraction) => {
+        const info = attraction.infos.find(
           (info) => info.language.code === language,
         );
 
         if (!info) return null;
 
         return (
-          <Link to={`/countries/${country.id}`} key={country.id}>
+          <Link key={attraction.id} to={`/attractions/${attraction.id}`}>
             <Card
-              image={new URL(country.image, SERVER_URL).href}
+              image={new URL(attraction.image, SERVER_URL).href}
               title={info.name}
-              code={country.code}
               subtitle={info.description}
             />
           </Link>

@@ -10,5 +10,3 @@ export const endpoints = {
   attractions: `${BASE_URL}attractions`,
   attraction: (id: string) => `${BASE_URL}attractions/${id}`,
 };
-
-export const imageUrl = (path: string) => `${SERVER_URL}$`;

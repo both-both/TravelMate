@@ -1,21 +1,44 @@
 import styled from "styled-components";
 import { theme } from "../../../styled/Theme";
 
-export const SelectStyled = styled.select`
-  &[aria-pressed="true"] {
-    /* outline: 2px solid ${theme.color.primary};
-    outline-offset: 3px; */
+export const SelectWrapper = styled.div`
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+
+  svg {
+    position: absolute;
+    pointer-events: none;
+    color: ${theme.color.dark.control};
   }
 
-  border: none;
-  border-radius: 999px;
+  .globe {
+    left: 14px;
+  }
 
-  padding: 10px 16px;
+  .chevron {
+    right: 14px;
+  }
+`;
 
-  background: #eef5fc;
-  color: ${theme.color.primary};
+export const SelectStyled = styled.select`
+  appearance: none;
+  border: 1px solid #e3e8ef;
+  border-radius: 9px;
+  padding: 12px 40px 12px 44px;
+  background: ${theme.color.white};
+  color: ${theme.color.dark.control};
+
+  font-family: ${theme.font.body};
+  font-size: ${theme.fontsize.body};
+  font-weight: ${theme.fontWeight.semibold};
 
   cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid ${theme.color.primary};
+    outline-offset: 2px;
+  }
 `;
 
 export const DarkButton = styled(SelectStyled)`
