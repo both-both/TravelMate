@@ -1,24 +1,18 @@
-// modules/SearchBar/SearchBar.tsx
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { Button } from "../../elements/Button/Button";
 import { SearchBarStyled, SearchInput } from "./SearchBar.styled";
 import type { SearchBarProps } from "./SearchBar.types";
 
 export const SearchBar = ({
-  onSearch,
-  placeholder = "Search for countries, cities or places...",
+  placeholder = "Find your next destination",
 }: SearchBarProps) => {
   const [query, setQuery] = useState("");
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    onSearch(query);
-  };
-
   return (
-    <SearchBarStyled onSubmit={handleSubmit} role="search">
+    <SearchBarStyled action="/search" method="GET" role="search">
       <SearchInput
         type="search"
+        name="keyword"
         value={query}
         onChange={setQuery}
         placeholder={placeholder}

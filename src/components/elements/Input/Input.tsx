@@ -2,6 +2,7 @@ import { InputStyled } from "./Input.styled";
 import type { InputProps } from "./Input.types";
 
 export const Input = ({
+  name,
   value,
   onChange,
   type = "text",
@@ -11,6 +12,7 @@ export const Input = ({
 }: InputProps) => {
   return (
     <InputStyled
+      name={name}
       className={className}
       type={type}
       value={value}

@@ -8,6 +8,7 @@ export const CountryList = ({ mode = "all" }: { mode?: "all" | "popular" }) => {
 
   if (error) return <p role="alert">{error}</p>;
   if (isLoading) return <p>Loading...</p>;
+  if (countries.length === 0) return <p>No result found.</p>;
 
   const finalList = mode === "popular" ? countries.slice(0, 5) : countries;
 

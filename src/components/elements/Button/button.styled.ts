@@ -26,7 +26,7 @@ export const ButtonStyled = styled.button<{ $variant: ButtonVariant }>`
   border-radius: 999px;
   padding: 12px 20px;
   font-family: ${theme.font.body};
-  font-size: ${theme.fontsize.navigation};
+  font-size: ${theme.fontsize.body};
   font-weight: ${theme.fontWeight.semibold};
   cursor: pointer;
 

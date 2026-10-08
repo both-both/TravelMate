@@ -4,8 +4,12 @@ import { Hero } from "../../components/modules/Hero/Hero";
 
 export const CitiesPage = () => {
   return (
-    <ContentWrapper title="Cities" description="Udforsk alle byer" showTitle>
-      <Hero />
+    <ContentWrapper
+      title="Cities"
+      description="Udforsk alle byer"
+      showTitle
+      hero={<Hero />}
+    >
       <CityList />
     </ContentWrapper>
   );

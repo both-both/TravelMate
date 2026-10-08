@@ -5,7 +5,7 @@ export const NavStyled = styled.nav`
   display: flex;
   align-items: center;
   gap: 20px;
-  color: ${theme.color.dark.control};
+  color: var(--color-text);
 
   a {
     padding: 8px;

@@ -14,14 +14,14 @@ export const SectionHeader = styled.div`
   h2 {
     margin: 0;
     font-size: ${theme.fontsize.h2};
-    color: ${theme.color.tertiary};
+    color: var(--color-heading);
   }
 
   a {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: ${theme.color.primary};
+    color: var(--color-link);
     font-weight: ${theme.fontWeight.semibold};
   }
 `;

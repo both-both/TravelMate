@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { theme } from "../../../styled/Theme";
 
 export const MapFrame = styled.iframe`
   display: block;
   width: 100%;
-  height: 350px;
+  aspect-ratio: 16 / 9;
+  min-height: 250px;
   border: 0;
   border-radius: 12px;
 `;
@@ -14,6 +14,6 @@ export const MapLink = styled.a`
   align-items: center;
   gap: 6px;
   margin-top: 8px;
-  color: ${theme.color.mutedText};
+  color: var(--color-muted);
   text-decoration: underline;
 `;

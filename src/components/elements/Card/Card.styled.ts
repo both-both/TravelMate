@@ -10,7 +10,7 @@ export const CardStyled = styled.article`
 
   overflow: hidden;
   background-color: ${theme.color.white};
-  border: 1px solid ${theme.color.primary};
+  /* border: 1px solid ${theme.color.primary}; */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   transition: 0.2s;

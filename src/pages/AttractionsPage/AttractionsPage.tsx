@@ -8,8 +8,8 @@ export const AttractionsPage = () => {
       title="Places"
       description="Udforsk alle seværdigheder"
       showTitle
+      hero={<Hero />}
     >
-      <Hero />
       <AttractionList />
     </ContentWrapper>
   );

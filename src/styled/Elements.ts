@@ -13,7 +13,7 @@ export const MainStyle = styled.main`
 export const ListStyled = styled.ul`
   ${reset};
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-auto-rows: 1fr;
   align-items: stretch;
   gap: 1rem;
@@ -34,6 +34,10 @@ export const DetailsGrid = styled.div`
   align-items: start;
   gap: 32px;
   margin-top: 24px;
+
+  @media (max-width: ${theme.breakpoint.footer}) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 export const DetailImage = styled.img`
@@ -48,7 +52,7 @@ export const BackLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: ${theme.color.primary};
+  color: var(--color-link);
   font-weight: ${theme.fontWeight.semibold};
 `;
 
@@ -61,7 +65,7 @@ export const DetailTitle = styled.div`
   h1 {
     text-transform: none;
     font-size: 2.5rem;
-    color: ${theme.color.tertiary};
+    color: var(--color-heading);
   }
 `;
 
@@ -74,7 +78,7 @@ export const InfoList = styled.dl`
   }
 
   a {
-    color: ${theme.color.primary};
+    color: var(--color-link);
     text-decoration: underline;
   }
 `;

@@ -9,6 +9,7 @@ import {
   CardSubtitle,
   CardTitle,
 } from "./Card.styled";
+import { LuMapPin } from "react-icons/lu";
 
 export const Card = ({ image, title, subtitle, code, meta }: CardProps) => {
   return (
@@ -28,7 +29,11 @@ export const Card = ({ image, title, subtitle, code, meta }: CardProps) => {
 
         {subtitle && <CardSubtitle>{truncateText(subtitle, 60)}</CardSubtitle>}
 
-        {meta && <CardMeta>📍 {meta}</CardMeta>}
+        {meta && (
+          <CardMeta>
+            <LuMapPin aria-hidden="true" /> {meta} {meta}
+          </CardMeta>
+        )}
       </CardContent>
     </CardStyled>
   );

@@ -8,6 +8,7 @@ export const AttractionList = ({ limit }: { limit?: number }) => {
 
   if (error) return <p role="alert">{error}</p>;
   if (isLoading) return <p>Loading...</p>;
+  if (attractions.length === 0) return <p>results found.</p>;
 
   const finalList = limit ? attractions.slice(0, limit) : attractions;
 

@@ -8,6 +8,7 @@ export const CityList = ({ limit }: { limit?: number }) => {
 
   if (error) return <p role="alert">{error}</p>;
   if (isLoading) return <p>Loading...</p>;
+  if (cities.length === 0) return <p>No results found.</p>;
 
   const finalList = limit ? cities.slice(0, limit) : cities;
 

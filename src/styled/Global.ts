@@ -9,20 +9,31 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
+  --color-text: ${theme.color.text};
+  --color-heading: ${theme.color.tertiary};
+  --color-muted: ${theme.color.mutedText};
+  --color-link: ${theme.color.primary};
+
     color-scheme: light;
     margin: 0;
     font-family: ${theme.font.body};
     font-size: ${theme.fontsize.body};
     line-height: ${theme.lineHeight.body};
     background: ${theme.color.background};
-    color: ${theme.color.black};
+    color: var(--color-text);
+
+
   }
 
-  body.dark-mode {
-    color-scheme: dark;
-    background: ${theme.color.dark.background};
-    color: ${theme.color.dark.text};
-  }
+ body.dark-mode {
+  --color-text: ${theme.color.dark.text};
+  --color-heading: ${theme.color.dark.text};
+  --color-muted: ${theme.color.dark.mutedText};
+  --color-link: ${theme.color.dark.accent};
+
+  color-scheme: dark;
+  background: ${theme.color.dark.background};
+}
 
   h1, h2, h3 {
     font-weight: ${theme.fontWeight.semibold};
@@ -49,11 +60,13 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .page-heading {
-    display: flex;
-    align-items: center;
-    min-height: 100px;
-    margin: 0;
-  }
+  display: flex;
+  align-items: center;
+  min-height: 100px;
+  margin: 0;
+  text-transform: none;
+  color: var(--color-heading);
+}
 
   .section-heading {
     font-family: ${theme.font.heading};

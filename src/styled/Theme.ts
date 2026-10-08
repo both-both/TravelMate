@@ -10,7 +10,7 @@ export const theme = {
     text: "#222",
     mutedText: "#64748b",
     dark: {
-      background: "#1e1e1e",
+      background: "#182a41",
       text: "#ffffff",
       mutedText: "#b8c8d9",
       border: "#34475c",

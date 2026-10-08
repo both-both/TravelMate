@@ -10,6 +10,7 @@ export const HomePage = () => {
   return (
     <ContentWrapper title="Travel Mate" description="Find din næste rejse her">
       <Hero />
+
       <Section
         title="Popular Countries"
         link="/countries"

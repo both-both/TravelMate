@@ -8,8 +8,8 @@ export const CountriesPage = () => {
       title="Countries"
       description="Udforsk alle lande"
       showTitle
+      hero={<Hero />}
     >
-      <Hero />
       <CountryList />
     </ContentWrapper>
   );

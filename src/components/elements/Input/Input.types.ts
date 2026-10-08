@@ -5,4 +5,5 @@ export type InputProps = {
   placeholder?: string;
   ariaLabel?: string;
   className?: string;
+  name?: string;
 };
