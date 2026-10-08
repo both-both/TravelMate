@@ -31,7 +31,7 @@ export const Card = ({ image, title, subtitle, code, meta }: CardProps) => {
 
         {meta && (
           <CardMeta>
-            <LuMapPin aria-hidden="true" /> {meta} {meta}
+            <LuMapPin aria-hidden="true" /> {meta}
           </CardMeta>
         )}
       </CardContent>
