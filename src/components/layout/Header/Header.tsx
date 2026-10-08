@@ -7,6 +7,7 @@ import {
   Logo,
 } from "./Header.styled";
 import { useLanguage } from "../../../context/LanguageContext/LanguageContext";
+import { useLanguages } from "../../../hooks/useLanguages";
 import { Select } from "../../elements/Select/Select";
 import { Button } from "../../elements/Button/Button";
 import { LuMoon, LuSun } from "react-icons/lu";
@@ -14,6 +15,7 @@ import { useDarkMode } from "../../../context/DarkModeContext/DarkModeContext";
 
 export const Header = () => {
   const { language, setLanguage } = useLanguage();
+  const languages = useLanguages();
   const { darkMode, setDarkMode } = useDarkMode();
 
   return (
@@ -30,11 +32,10 @@ export const Header = () => {
             value={language}
             onChange={setLanguage}
             ariaLabel="Vælg sprog"
-            options={[
-              { value: "da", label: "DA" },
-              { value: "en", label: "EN" },
-              { value: "es", label: "ES" },
-            ]}
+            options={languages.map((lang) => ({
+              value: lang.code,
+              label: lang.code.toUpperCase(),
+            }))}
           />
 
           <Button isActive={!darkMode} onClick={() => setDarkMode(false)}>

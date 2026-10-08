@@ -52,3 +52,5 @@ export const cityQuery = `*[_type == "city" && slug.current == $slug][0]{
 export const attractionsQuery = `*[_type == "attraction"]{ ${attractionFields} } | order(name asc)`;
 
 export const attractionQuery = `*[_type == "attraction" && slug.current == $slug][0]{ ${attractionFields} }`;
+
+export const languagesQuery = `*[_type == "language"] | order(name asc){ code, name }`;
